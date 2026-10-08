@@ -22,12 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Unzip
         run: |
+          mkdir -p temp_extract
+          unzip doxygen_artifacts.zip -d temp_extract/
           mkdir -p public
-          unzip doxygen_artifacts.zip -d public/
-          if [ -d "public/html" ]; then mv public/html/* public/; fi
+          if [ -d "temp_extract/public" ]; then
+            mv temp_extract/public/* public/
+          else
+            mv temp_extract/* public/
+          fi
+          rm -rf temp_extract
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
