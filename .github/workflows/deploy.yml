@@ -26,7 +26,7 @@ jobs:
       - name: Unzip
         run: |
           mkdir -p public
-          unzip docs.zip -d public/
+          unzip doxygen_artifacts.zip -d public/
           if [ -d "public/html" ]; then mv public/html/* public/; fi
 
       - uses: actions/configure-pages@v5
